@@ -1,5 +1,5 @@
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+
 var firebaseConfig = {
   apiKey: "AIzaSyDwXSIffMJnFuFd9KNnyFDPJu_6_TEiNEY",
   authDomain: "random1-3bd15.firebaseapp.com",
@@ -9,9 +9,10 @@ var firebaseConfig = {
   appId: "1:612102040679:web:aa766127c2c3fb4b3c78c2",
   measurementId: "G-X0C6PWK968"
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+
 
 
 
@@ -19,20 +20,22 @@ firebase.analytics();
 function signUp() {
   var email = document.getElementById("email");
   var password = document.getElementById("password");
-  // [START auth_signup_password]
   firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
     .then((userCredential) => {
-      // Signed in 
+
       var user = userCredential.user;
+      var use = firebase.auth().currentUser.uid;
+      localStorage.setItem("uid", use);
       window.location.href = "home.html";
-      // ...
+
     })
     .catch((error) => {
+
       var errorCode = error.code;
       var errorMessage = error.message;
-      // ..
+
     });
-  // [END auth_signup_password]
+
   alert("Signed Up")
 }
 
@@ -41,21 +44,26 @@ function signUp() {
 function signIn() {
   var email = document.getElementById("email");
   var password = document.getElementById("password");
-  // [START auth_signin_password]
   firebase.auth().signInWithEmailAndPassword(email.value, password.value)
     .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
 
+      var user = userCredential.user;
+      var use = firebase.auth().currentUser.uid;
+      localStorage.setItem("uid", use);
       window.location.href = "home.html";
-      // ...
+
       alert("Signed In");
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      alert("not signed up");
+      alert("not signed up or wrong password");
     });
-  // [END auth_signin_password]
+
 
 }
+
+
+
+
+
